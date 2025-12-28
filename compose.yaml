@@ -1,0 +1,40 @@
+name: Hotel-Demo
+
+services:
+  #react frontend 
+  client:
+    build: ./client
+    container_name: hotel-react-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+  
+  #backend
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "82:9000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - database
+  
+  #database section
+  database:
+    image: mongo:7.0.3
+    container_name: Hotel-mongo-database
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 1234 
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
