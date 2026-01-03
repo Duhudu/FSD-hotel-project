@@ -32,6 +32,8 @@ exports.addRoom = async (req, res) => {
       capacity: req.body.roomCapacity,
       size: req.body.roomSize,
       view: req.body.roomView,
+      bedType: req.body.bedType,
+      tagline: req.body.tagline,
       images: imagePaths, //connects the image data to the db
     });
 
@@ -133,6 +135,8 @@ exports.updateRoom = async (req, res) => {
     capacity: req.body.roomCapacity,
     size: req.body.roomSize,
     view: req.body.roomView,
+    bedType: req.body.bedType,
+    tagline: req.body.tagline,
     // Save the combined list
     images: finalImages,
   };
@@ -152,4 +156,3 @@ exports.updateRoom = async (req, res) => {
   );
   res.json({ success: true, message: "Batch update successful!" });
 };
-//Logic to Delete Rooms

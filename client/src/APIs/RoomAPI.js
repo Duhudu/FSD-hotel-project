@@ -6,7 +6,7 @@ export const allRoomsList = {
   getRooms: async () => {
     try {
       //call the backend and get data
-      const response = await fetch(`${API_URL}/get`, {
+      const response = await fetch(`${API_URL}/api/admin/room/get`, {
         method: "GET",
       });
       //see if data is sent by the backend
@@ -28,7 +28,7 @@ export const allRoomsList = {
   //Add (post) rooms API call logic
   addRooms: async (formData) => {
     try {
-      const response = await fetch(`${API_URL}/add`, {
+      const response = await fetch(`${API_URL}/api/admin/room/add`, {
         method: "POST",
         body: formData,
       });
@@ -60,10 +60,10 @@ export const allRoomsList = {
       return { success: false, message: error.message };
     }
   },
-  //Select Room for Edit From
+  //Select Room from the id
   getUpdateRoom: async (id) => {
     try {
-      const response = await fetch(`${API_URL}/select/${id}`, {
+      const response = await fetch(`${API_URL}/api/admin/room/select/${id}`, {
         method: "GET",
       });
       //see if data is sent by the backend
@@ -84,10 +84,13 @@ export const allRoomsList = {
   //Update Room
   updateRooms: async (typeId, formData) => {
     try {
-      const response = await fetch(`${API_URL}/update/${typeId}`, {
-        method: "PUT",
-        body: formData,
-      });
+      const response = await fetch(
+        `${API_URL}/api/admin/room/update/${typeId}`,
+        {
+          method: "PUT",
+          body: formData,
+        }
+      );
       if (response.ok) {
         console.log("Rooms Updated");
         return { success: true };

@@ -9,6 +9,8 @@ const roomTypeSchema = new mongoose.Schema({
   capacity: Number,
   size: String,
   view: String,
+  bedType: String,
+  tagline: String,
   images: [String],
 });
 

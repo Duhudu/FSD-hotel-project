@@ -52,7 +52,7 @@ function GuestDropdown({ onTotalChange }) {
 
     return (
         <div className="dropdownGuests" ref={dropdownRef} style={{ position: 'relative' }}>
-            <label>Guests</label>
+            
             <div onClick={toggleDropdown} style={{
                 border: '1px solid #ccc', padding: '5px', cursor: 'pointer',
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center', minWidth: '150px'

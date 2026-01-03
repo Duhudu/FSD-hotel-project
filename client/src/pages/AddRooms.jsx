@@ -3,6 +3,7 @@ import { validateRoomForm } from "../helpers/AddRooms_validations";
 import { allRoomsList } from "../APIs/RoomAPI";
 import Swal from "sweetalert2";
 
+
 function AddRooms() {
   //get user inputs
   const [roomType, setRoomType] = useState("Deluxe Collection"); //
@@ -19,6 +20,8 @@ function AddRooms() {
   const [defaultStatus, setDefaultStatus] = useState("Ready");
   const [startingRoomNumber, setStartingRoomNumber] = useState("");
   const [floor, setFloor] = useState("");
+  const [bedType, setBedType] = useState("");
+  const [tagline, setTagline] = useState("");
 
   //Select Options Section
 
@@ -94,6 +97,9 @@ function AddRooms() {
       floor,
       startingRoomNumber,
       roomImages,
+      bedType,
+      tagline
+      
     };
     //run validation
     const validation = validateRoomForm(roomDataToCheck);
@@ -124,6 +130,8 @@ function AddRooms() {
     formData.append("defaultStatus", defaultStatus);
     formData.append("floor", floor);
     formData.append("startingRoomNumber", startingRoomNumber);
+    formData.append("bedType",bedType);
+    formData.append("tagline",tagline)
 
     // Pack the images
     //loop through the files and append them one by one
@@ -158,6 +166,8 @@ function AddRooms() {
     setDefaultStatus("Ready");
     setStartingRoomNumber("");
     setFloor("");
+    setBedType("");
+    setTagline("");
   };
   return (
     <div className="mainDiv">
@@ -195,6 +205,8 @@ function AddRooms() {
             value={roomDescription}
             onChange={(e) => setRoomDescription(e.target.value)}
           />
+          <label>Tagline</label>
+          <input type="text" value={tagline} onChange={(e) => setTagline(e.target.value)} />
           <label>Price</label>
           <input
             type="text"
@@ -242,6 +254,8 @@ function AddRooms() {
               </option>
             ))}
           </select>
+          <label>Bed Type</label>
+          <input type="text" value={bedType} onChange={(e) => setBedType(e.target.value)} />
 
           <label>Room Status</label>
           <select

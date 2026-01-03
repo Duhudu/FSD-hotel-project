@@ -6,7 +6,7 @@ export const homePageApiCalls = {
   getRooms: async () => {
     try {
       //call the backen to get the data
-      const response = await fetch(`${API_URL}/get`, {
+      const response = await fetch(`${API_URL}/api/home/get`, {
         method: "GET",
       });
       //check if the backend sent data

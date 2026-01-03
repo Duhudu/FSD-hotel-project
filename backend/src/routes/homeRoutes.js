@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     // Rename file to avoid duplicates
-    cb(null, "room-" + Date.now() + path.extname(file.originalname));
+    cb(null, "user-" + Date.now() + path.extname(file.originalname));
   },
 });
 const upload = multer({ storage: storage });

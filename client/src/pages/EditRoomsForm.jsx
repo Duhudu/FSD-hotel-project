@@ -17,7 +17,6 @@ function EditRoomsForm() {
       const response = await allRoomsList.getUpdateRoom(id);
       if (response.success) {
         setRoom(response.data);
-        console.log("Room Data in Edit Form Page", room);
         setLoading(false);
       } else {
         Swal.fire("Error", response.message, "error");
@@ -27,20 +26,25 @@ function EditRoomsForm() {
   }, [id]);
 
   //Edit Section
-  const [roomType, setRoomType] = useState("Deluxe");
+  const [roomType, setRoomType] = useState("");
   const [roomName, setRoomName] = useState("");
-  const [roomLocation, setRoomLocation] = useState("Kandy");
+  const [roomLocation, setRoomLocation] = useState("");
   const [roomDescription, setRoomDescription] = useState("");
   const [roomPrice, setRoomPrice] = useState("");
-  const [roomCapacity, setRoomCapacity] = useState("2");
+  const [roomCapacity, setRoomCapacity] = useState("");
   const [roomSize, setRoomSize] = useState(""); // the size of the room
-  const [roomView, setRoomView] = useState("Mountains");
+  const [roomView, setRoomView] = useState("");
   const [existingImages, setExistingImages] = useState([]);
-  const [defaultStatus, setDefaultStatus] = useState("Ready");
+  const [defaultStatus, setDefaultStatus] = useState("");
   const [floor, setFloor] = useState("");
+  const [bedType, setBedType] = useState("");
+  const [tagline, setTagline] = useState("");
   //for new image
   const [newImages, setNewImages] = useState([]);
-
+  
+  useEffect(() =>{
+    console.log("Room Data in Edit Room page",room)
+  },[room])
   //set the data when the room data changes or arrives
   useEffect(
     () => {
@@ -66,14 +70,20 @@ function EditRoomsForm() {
       if (room?.roomTypeId?.size) {
         setRoomSize(room.roomTypeId.size);
       }
-      if (room?.roomstatus) {
-        setDefaultStatus(room.roomstatus || "Ready");
+      if (room?.status) {
+        setDefaultStatus(room.status);
       }
       if (room?.roomTypeId?.view) {
         setRoomView(room.roomTypeId.view);
       }
       if (room?.floor) {
         setFloor(room.floor);
+      }
+      if(room?.roomTypeId?.bedType){
+        setBedType(room.roomTypeId.bedType);
+      }
+      if(room?.roomTypeId?.tagline){
+        setTagline(room.roomTypeId.tagline)
       }
       if (room?.roomTypeId?.images) {
         setExistingImages(room.roomTypeId.images);
@@ -97,9 +107,9 @@ function EditRoomsForm() {
 
   //Room Type
   const roomTypeOptions = [
-    { value: "Deluxe", label: "Deluxe" },
-    { value: "Standard", label: "Standard" },
-    { value: "Family", label: "Family" },
+    { value: "Deluxe Collection", label: "Deluxe Collection" },
+    { value: "Executive Suites", label: "Executive Suites" },
+    { value: "Standard Collection", label: "Standard Collection" },
   ];
   //Room Capacity Section
   const roomCapacityOptions = [
@@ -157,6 +167,8 @@ function EditRoomsForm() {
         roomView,
         defaultStatus,
         floor,
+        bedType,
+        tagline,
         existingImages,
         newImages,
       };
@@ -182,6 +194,8 @@ function EditRoomsForm() {
       formData.append("roomView", roomView);
       formData.append("defaultStatus", defaultStatus);
       formData.append("floor", floor);
+      formData.append("bedType",bedType);
+      formData.append("tagline",tagline);
 
       //Append "Existing/old Images"
       formData.append("existingImages", JSON.stringify(existingImages));
@@ -257,6 +271,10 @@ function EditRoomsForm() {
             value={roomDescription}
             onChange={(e) => setRoomDescription(e.target.value)}
           />
+          <label>Bed Type</label>
+          <input type="text" value={bedType} onChange={(e) => setBedType(e.target.value)} />
+          <label>Tagline</label>
+          <input type="text" value={tagline} onChange={(e) => setTagline(e.target.value)} />
           <label>Price</label>
           <input
             type="text"

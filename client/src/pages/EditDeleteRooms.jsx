@@ -151,7 +151,7 @@ function EditDeleteRooms() {
               <th>Type</th>
               <th>Name</th>
               <th>Location</th>
-              <th>No of Rooms</th>
+              <th>Bed Type</th>
               <th>Price</th>
               <th>Action</th>
             </tr>
